@@ -62,25 +62,25 @@ const SBSVideoPlayer = () => {
 
         // Create video meshes for each mode
         const videoMeshNormal = new THREE.Mesh(geometry, createMaterial(0, 1)); // Full video for normal mode
-        const videoMeshNonStereoRight = new THREE.Mesh(geometry, createMaterial(0.5, 0.5)); // Right half for nonStereoVR mode
+        const videoMeshNonStereoLeft = new THREE.Mesh(geometry, createMaterial(0, 0.5)); // Left half for nonStereoVR mode
         const videoMeshStereoLeft = new THREE.Mesh(geometry, createMaterial(0, 0.5)); // Left half for stereoVR mode
         const videoMeshStereoRight = new THREE.Mesh(geometry, createMaterial(0.5, 0.5)); // Right half for stereoVR mode
 
         // Add video meshes to scene
         scene.add(videoMeshNormal);
-        scene.add(videoMeshNonStereoRight);
+        scene.add(videoMeshNonStereoLeft);
         scene.add(videoMeshStereoLeft);
         scene.add(videoMeshStereoRight);
 
         // Set initial positions
         videoMeshNormal.position.set(0, 0, -20);
-        videoMeshNonStereoRight.position.set(0, 0, -20);
+        videoMeshNonStereoLeft.position.set(0, 0, -20);
         videoMeshStereoLeft.position.set(-10, 0, -20);
         videoMeshStereoRight.position.set(10, 0, -20);
 
         // Set initial visibility
         videoMeshNormal.visible = false;
-        videoMeshNonStereoRight.visible = false;
+        videoMeshNonStereoLeft.visible = false;
         videoMeshStereoLeft.visible = false;
         videoMeshStereoRight.visible = false;
 
@@ -89,21 +89,21 @@ const SBSVideoPlayer = () => {
             switch (mode) {
                 case 'stereoVR':
                     videoMeshNormal.visible = false;
-                    videoMeshNonStereoRight.visible = false;
+                    videoMeshNonStereoLeft.visible = false;
                     videoMeshStereoLeft.visible = true;
                     videoMeshStereoRight.visible = true;
                     console.log('Stereo VR mode active: Left and Right meshes visible');
                     break;
                 case 'nonStereoVR':
                     videoMeshNormal.visible = false;
-                    videoMeshNonStereoRight.visible = true;
+                    videoMeshNonStereoLeft.visible = true;
                     videoMeshStereoLeft.visible = false;
                     videoMeshStereoRight.visible = false;
-                    console.log('Non-Stereo VR mode active: Right mesh visible');
+                    console.log('Non-Stereo VR mode active: Left mesh visible');
                     break;
                 default: // 'normal'
                     videoMeshNormal.visible = true;
-                    videoMeshNonStereoRight.visible = false;
+                    videoMeshNonStereoLeft.visible = false;
                     videoMeshStereoLeft.visible = false;
                     videoMeshStereoRight.visible = false;
                     console.log('Normal mode active: Full video mesh visible');
